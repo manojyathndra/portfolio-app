@@ -4,7 +4,9 @@
     <div class="glow glow--right" aria-hidden="true"></div>
 
     <v-container class="nav" fluid>
-      <div class="nav__brand">Resume</div>
+      <div class="nav__brand">
+        <img src="@/assets/my-logo.jpg" alt="Manoj logo" class="nav__logo">
+      </div>
       <div class="nav__links">
         <a href="#about">About</a>
         <a href="#skills">Skills</a>
@@ -124,20 +126,6 @@
           <div class="featured-experience">
             <Infosys />
           </div>
-          <div class="card-grid">
-            <article v-for="job in experience" :key="job.company" class="card">
-              <div class="card__head">
-                <div>
-                  <h3>{{ job.role }}</h3>
-                  <p class="muted">{{ job.company }} · {{ job.location }}</p>
-                </div>
-                <p class="muted">{{ job.period }}</p>
-              </div>
-              <ul>
-                <li v-for="point in job.highlights" :key="point">{{ point }}</li>
-              </ul>
-            </article>
-          </div>
         </v-container>
       </section>
 
@@ -155,8 +143,8 @@
             <article v-for="edu in education" :key="edu.school" class="card">
               <div class="card__head">
                 <div>
+                  <p class="card__eyebrow">{{ edu.school }}</p>
                   <h3>{{ edu.degree }}</h3>
-                  <p class="muted">{{ edu.school }}</p>
                 </div>
                 <p class="muted">{{ edu.period }}</p>
               </div>
@@ -184,13 +172,12 @@
         <v-container>
           <h2>Contact</h2>
           <div class="contact-card">
+            <div class="contact-photo">
+              <img :src="myPic" alt="Manoj Yathindra Thagadur Srinivasu">
+            </div>
             <div>
               <p class="muted">Email</p>
               <p class="contact">{{ profile.email }}</p>
-            </div>
-            <div>
-              <p class="muted">Phone</p>
-              <p class="contact">{{ profile.phone }}</p>
             </div>
             <div>
               <p class="muted">Links</p>
@@ -233,15 +220,14 @@ import bitbucketLogo from '@/assets/skill-logos/bitbucket.svg'
 import jiraLogo from '@/assets/skill-logos/jira.svg'
 import nginxLogo from '@/assets/skill-logos/nginx.svg'
 import redpandaLogo from '@/assets/skill-logos/redpanda-kafka.png'
+import myPic from '@/assets/my_pic.jpg'
 
 const profile = {
   name: 'Manoj Yathindra Thagadur Srinivasu',
   title: 'Automation + Full‑stack Engineer',
   summary: 'Results-driven engineer focused on automation, migration, and scalable systems that deliver measurable operational impact.',
-  about: 'Short bio or professional summary from your resume.',
   location: 'Castle Pines, Colorado',
   email: 'manoj.yathindra@gmail.com',
-  phone: '+1 (000) 000-0000',
   focus: 'Automation, DevOps, Full‑stack',
   tools: ['Ruby', 'Python', 'Node.js', 'Vue.js', 'Docker', 'Airflow', 'Elastic', 'Kibana'],
   highlights: [
@@ -315,8 +301,6 @@ const skills = [
     ]
   }
 ]
-
-const experience = []
 
 const education = [
   {

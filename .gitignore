@@ -31,3 +31,8 @@ coverage
 
 package-lock.json
 node_modules/*
+
+# Local tooling
+.vite
+.vscode
+.github
