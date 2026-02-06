@@ -1,15 +1,19 @@
-import './assets/main.css'
 import { createApp } from 'vue'
 import App from './App.vue'
+import './assets/main.css'
+
+// Vuetify
+import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
-const app = createApp(App)
+import 'core-js/stable';
+import 'regenerator-runtime/runtime';
 
-// Create a Vuetify instance
-const vuetify = createVuetify()
+const vuetify = createVuetify({
+    components,
+    directives,
+})
 
-// Use Vuetify
-app.use(vuetify)
-
-// Mount your app
-app.mount('#app')
+createApp(App).use(vuetify).mount('#app')
