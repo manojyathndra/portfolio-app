@@ -7,7 +7,7 @@
       </video>
       <div class="charter__overlay"></div>
       <div class="charter__badge">
-        <span>Automation</span>
+        <span>System</span>
         <strong>Engineer II</strong>
       </div>
     </div>
