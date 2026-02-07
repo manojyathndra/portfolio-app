@@ -1,0 +1,39 @@
+image: node:20-bullseye
+
+stages:
+  - build
+  - deploy
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - node_modules/
+
+variables:
+  AWS_DEFAULT_REGION: "us-east-1"
+  S3_BUCKET: "www.mayathsr-myts.com"
+  CLOUDFRONT_DISTRIBUTION_ID: "E3VX0FHAZK4KNG"
+
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - dist/
+    expire_in: 1 hour
+
+deploy:
+  stage: deploy
+  only:
+    - main
+  dependencies:
+    - build
+  before_script:
+    - apt-get update && apt-get install -y python3-pip
+    - pip3 install --no-cache-dir awscli
+  script:
+    - aws --version
+    - aws s3 sync dist s3://$S3_BUCKET --delete
+    - aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths "/*"
